@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from typing import List
 
 from lib import are_anagrams
@@ -7,6 +8,13 @@ from AnagramCount import AnagramCount
 
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["GET"],
+)
+
 anagrams_store = AnagramsStore()
 
 

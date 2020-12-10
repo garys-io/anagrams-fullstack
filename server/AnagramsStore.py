@@ -17,9 +17,9 @@ class AnagramsStore:
             self._anagrams[anagram] += 1
 
     def get_top10(self) -> List[AnagramCount]:
-        anagram_list = [AnagramCount({'anagram': key, 'count': val})
+        anagram_list = [AnagramCount(anagram=key, count=val)
                         for key, val in self._anagrams.items()]
 
-        anagram_list.sort(key=lambda x: x['count'], reverse=True)
+        anagram_list.sort(key=lambda x: x.count, reverse=True)
 
         return anagram_list[:10]
