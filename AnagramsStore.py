@@ -1,5 +1,7 @@
 from typing import List
 
+from AnagramCount import AnagramCount
+
 
 class AnagramsStore:
 
@@ -14,10 +16,9 @@ class AnagramsStore:
         else:
             self._anagrams[anagram] += 1
 
-    def get_top10(self) -> List[dict]:
-        anagram_list = [{'anagram': key, 'count': val}
+    def get_top10(self) -> List[AnagramCount]:
+        anagram_list = [AnagramCount({'anagram': key, 'count': val})
                         for key, val in self._anagrams.items()]
-
 
         anagram_list.sort(key=lambda x: x['count'], reverse=True)
 
