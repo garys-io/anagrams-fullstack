@@ -1,4 +1,16 @@
-import React, { useRef, MutableRefObject, useState } from 'react'
+import React, { useRef, MutableRefObject, useState, useEffect } from 'react'
+import {
+    Grid,
+    Container,
+    FormLabel,
+    Button,
+    Input,
+    Table,
+    TableHead,
+    TableBody,
+    TableRow,
+    TableCell
+} from '@material-ui/core'
 
 import AnagramCountRow from './AnagramCountRow'
 import './App.css'
@@ -32,19 +44,46 @@ function App() {
             .catch(console.error)
     }
 
+    useEffect(fetchTop10Anagrams, [])
+
     return (
-        <div className="App">
-            <header className="App-header">
-                <label htmlFor="word1">First word</label><input ref={word1} id="word1" type="text"/>
-                <label htmlFor="word2">Second word</label><input ref={word2} id="word2" type="text"/>
-                <button onClick={fetchAreAnagrams}>Fine if the two words are <code>anagrams</code></button>
-                <p><code>{msg}</code></p>
-            </header>
-            <section className="App-section">
-                <button onClick={fetchTop10Anagrams}>Refresh Top 10 Anagrams</button>
-                {top10Anagrams.map(AnagramCountRow)}
-            </section>
-        </div>
+        <Container>
+            <Grid container spacing={3}>
+                <Grid item xs={12} lg={6}>
+                    <Grid item xs={12}>
+                        <FormLabel>Enter two words to see if they are anagrams</FormLabel>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Input inputRef={word1} id="word1" type="text" placeholder="wolf..." />
+                        <Input inputRef={word2} id="word2" type="text" placeholder="flow..." />
+                        <Button onClick={fetchAreAnagrams} variant="contained">anagrams?</Button>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <FormLabel>{msg}</FormLabel>
+                    </Grid>
+                </Grid>
+                <Grid item xs={12} lg={6}>
+                    <Button
+                        onClick={fetchTop10Anagrams}
+                        variant="contained"
+                        fullWidth
+                    >
+                        Refresh Top 10 Anagrams
+                    </Button>
+                    <Table>
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>Anagram</TableCell>
+                                <TableCell>Count</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {top10Anagrams.map(AnagramCountRow)}
+                        </TableBody>
+                    </Table>
+                </Grid>
+            </Grid>
+        </Container>
     )
 }
 
