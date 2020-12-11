@@ -1,6 +1,6 @@
 # Anagrams Fullstack
 
-## Setup instrucations
+## Setup instructions
 
 * Assuming you have cloned the repo in directory `anagrams-fullstack`
 * For Back-end
